@@ -10,6 +10,8 @@ is_exists() {
 }
 
 
+# Export to $PATH a given path
+# $1 string - command name
 export_path() {
   : ${1:?}
   export PATH=$1:$PATH

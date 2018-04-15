@@ -23,7 +23,7 @@ echo export_path && {
     assert_raises "is_exists" "1"
   }
 
-  : "存在しないpathを与えたときexportされていることを期待" && {
+  : "指定したpathがexportされていることを期待" && {
     export_path "/path/to"
     assert_raises 'echo $PATH | grep /path/to' "0"
   }
