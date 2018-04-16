@@ -9,10 +9,44 @@ is_exists() {
   return $?
 }
 
-
-# Export to $PATH a given path
+# Export given a path to $PATH
 # $1 string - command name
 export_path() {
   : ${1:?}
   export PATH=$1:$PATH
+}
+
+# Remove given a path from $PATH
+# $1 string - command name
+remove_path() {
+  : ${1:?}
+  export PATH=$(echo -n $PATH | awk -v RS=: -v ORS=: '$0 != "'$1'"' | sed 's/:$//')
+}
+
+# Check given alias to already defined or not.
+# $1 string - alias name
+has_alias() {
+  : ${1:?}
+  alias $1 && return $true || return $false
+}
+
+# Check given string to running or not.
+# $1 string - fuzzy command name
+has_process() {
+  : ${1:?}
+  if is_osx; then
+    ps -fU$USER | grep $1 | grep -v grep > /dev/null 2>&1 && return $true || return $false
+  else
+    ps aux | grep $1 | grep -v grep > /dev/null 2>&1 && return $true || return $false
+  fi
+}
+
+has_file() {
+  : ${1:?}
+  [[ -f $1 ]] && return $true || return $false
+}
+
+has_env() {
+  : ${1:?}
+  [[ -z $1 ]] && return $false || return $true
 }
