@@ -1,0 +1,9 @@
+language: c
+
+sudo: true
+os:
+  - osx
+  - linux
+
+script:
+  - bash ./test/test.bash
