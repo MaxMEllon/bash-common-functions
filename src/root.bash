@@ -41,6 +41,8 @@ has_process() {
   fi
 }
 
+# Check given file in current directory.
+# $1 string - file name
 has_file() {
   : ${1:?}
   [[ -f $1 ]] && return $true || return $false
@@ -49,4 +51,8 @@ has_file() {
 has_env() {
   : ${1:?}
   [[ -z $1 ]] && return $false || return $true
+}
+
+is_git_repo() {
+  git rev-parse --is-inside-work-tree &> /dev/null 2>&1  && return $true || return $false
 }
