@@ -30,6 +30,28 @@ has_alias() {
   alias $1 && return $true || return $false
 }
 
+# Check current platform name
+os_type() {
+  if [[ "$(uname)" == 'Darwin' ]]; then
+    echo 'mac'
+  elif [[ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]]; then
+    echo 'linux'
+  elif [[ "$(expr substr $(uname -s) 1 10)" == 'MINGW32_NT' ]]; then
+    echo 'cygwin'
+  else
+    echo "Your platform ($(uname -a)) is not supported."
+    exit 1
+  fi
+}
+
+: && {
+  for p in mac linux cygwin; do
+    function is_$p {
+      [[ "$(os_type)" == "$p" ]]
+    }
+  done
+}
+
 # Check given string to running or not.
 # $1 string - fuzzy command name
 has_process() {
