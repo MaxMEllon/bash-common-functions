@@ -27,8 +27,7 @@ remove_path() {
 # $1 string - alias name
 has_alias() {
   : ${1:?}
-  alias $1 && return $true || return $false
-}
+  alias $1 && return $true || return $false }
 
 # Check current platform name
 os_type() {
@@ -71,19 +70,4 @@ has_file() {
 has_env() {
   : ${1:?}
   [[ -z $1 ]] && return $false || return $true
-}
-
-is_git_repo() {
-  git rev-parse --is-inside-work-tree &> /dev/null 2>&1  && return $true || return $false
-}
-
-git_branch() {
-  if is_git_repo; then
-    branch=$(git symbolic-ref --short HEAD)
-    echo $branch
-    return 0
-  else
-    echo "X"
-    return 1
-  fi
 }

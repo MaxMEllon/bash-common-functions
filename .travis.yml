@@ -6,4 +6,4 @@ os:
   - linux
 
 script:
-  - bash ./test/test.bash
+  - for i in test/*.test.bash; do; $i; done
