@@ -46,9 +46,7 @@ os_type() {
 
 : && {
   for p in mac linux cygwin; do
-    function is_$p {
-      [[ "$(os_type)" == "$p" ]]
-    }
+    eval "function is_$p { [[ \"$(os_type)\" == \"$p\" ]] && return $true || return $false; }"
   done
 }
 
