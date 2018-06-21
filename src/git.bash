@@ -7,13 +7,17 @@ if (( $? != 0 )); then
   return
 fi
 
-is_git_repo() {
+git.is_repo() {
   git rev-parse --is-inside-work-tree &> /dev/null 2>&1  && return $true || return $false
 }
 
-git_branch() {
-  if is_git_repo; then
-    branch=$(git symbolic-ref --short HEAD)
+git.diff-shortstat() {
+  git diff --shortstat | awk '{print " +" $4 " -" $6 " "}' | tr -d '\n'
+}
+
+git.branch() {
+  if git.is_repo; then
+    local branch=$(git symbolic-ref --short HEAD)
     echo $branch
     return 0
   else

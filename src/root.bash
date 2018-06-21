@@ -27,7 +27,8 @@ remove_path() {
 # $1 string - alias name
 has_alias() {
   : ${1:?}
-  alias $1 && return $true || return $false }
+  alias $1 && return $true || return $false
+}
 
 # Check current platform name
 os_type() {
@@ -71,3 +72,9 @@ has_env() {
   : ${1:?}
   [[ -z $1 ]] && return $false || return $true
 }
+
+strlen() {
+  : ${1:?}
+  echo ${#1}
+}
+

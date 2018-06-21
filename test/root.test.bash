@@ -75,3 +75,11 @@ describe "has_file" && {
   assert_end has_file
 }
 
+describe "strlen" && {
+  it "文字列が与えられたとき，その文字列長が得られることを期待" && {
+    actual="$(strlen hogehgoe)"
+    assert_raises "[[ "$actual" == "8" ]]" "0"
+  }
+
+  assert_end strlen
+}
