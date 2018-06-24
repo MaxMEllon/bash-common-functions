@@ -2,7 +2,7 @@
 
 . "./test/assert.sh"
 . "./test/spec.sh"
-. "./src/root.bash"
+. "./src/common.bash"
 
 describe is_exists && {
   it "存在するコマンドを与えたとき0が得られることを期待" && {
